@@ -1,24 +1,32 @@
-/* eslint no-restricted-globals: 0 */
-const CACHE_NAME = 'vivino-cache-v4';
-const URLS_TO_CACHE = self.serviceWorkerOption.assets;
+/**
+ * Created by piotrekzawada on 24.02.2018.
+ */
+/*eslint no-restricted-globals: ["error", "event", "fdescribe"]*/
+var CACHE_NAME = 'v1';
+
+const { assets } = global.serviceWorkerOption;
 const URLS_TO_IGNORE = ['chrome-extension', 'sockjs-node', '/wines'];
 
+let assetsToCache = [...assets, './'];
+
+
 self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(URLS_TO_CACHE);
-        })
-    );
+    console.log('event install', assetsToCache);
+    self.skipWaiting();
+
+    event.waitUntil(precache());
 });
 
 self.addEventListener('activate', (event) => {
+    console.log('event activate');
+
     event.waitUntil(
-        caches.keys().then(keys => {
-            return Promise.all(
-                keys.filter(key => key !== CACHE_NAME)
-                    .map(key => caches.delete(key))
-            );
-        })
+      caches.keys().then(keys => {
+          return Promise.all(
+              keys.filter(key => key !== CACHE_NAME)
+                  .map(key => caches.delete(key))
+          );
+      })
     );
 });
 
@@ -72,3 +80,10 @@ function fetchAndUpdate(request) {
         });
     });
 }
+
+function precache() {
+    return caches.open(CACHE_NAME).then(function (cache) {
+        return cache.addAll(assetsToCache);
+    });
+}
+
