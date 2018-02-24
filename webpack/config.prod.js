@@ -3,7 +3,9 @@ const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const paths = require('./paths');
+const path = require('path');
 
 module.exports = {
   entry: [
@@ -113,5 +115,10 @@ module.exports = {
       to: paths.build,
     }]),
     new webpack.optimize.UglifyJsPlugin(),
+
+    new ServiceWorkerWebpackPlugin({
+        entry: path.join(__dirname, '../src/sw.js'),
+        excludes: ['_redirects'],
+    }),
   ],
 };
