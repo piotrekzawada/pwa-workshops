@@ -5,7 +5,7 @@
 var CACHE_NAME = 'v1';
 
 const { assets } = global.serviceWorkerOption;
-const URLS_TO_IGNORE = ['chrome-extension', 'sockjs-node', '/wines'];
+const URLS_TO_IGNORE = ['chrome-extension', 'sockjs-node'];
 
 let assetsToCache = [...assets, './'];
 
