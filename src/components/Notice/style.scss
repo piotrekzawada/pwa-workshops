@@ -1,0 +1,11 @@
+.notice{
+  background: #FE5F55;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  transition: 0.5s;
+
+  &.active{
+    padding: 20px;
+  }
+}
