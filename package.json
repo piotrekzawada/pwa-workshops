@@ -51,6 +51,7 @@
     "react-lazyload": "^2.3.0",
     "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.2.1",
+    "roast": "^2.3.13",
     "whatwg-fetch": "^2.0.3"
   }
 }
