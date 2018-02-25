@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import { shape, number, array, object } from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import StarsRating from '../StarsRating';
 import BottleSvg from '../../svg-components/Bottle';
 import ItemDetail from '../ItemDetail';
@@ -19,7 +20,12 @@ const ItemShow = ({ match, items, history }) => {
   return (
       <article className="ItemShow">
         <Nav back title={item.name} annotation={`${item.color}, ${item.region}, ${item.country}`} />
-
+        <Helmet>
+          <title>{item.name}</title>
+          <meta property="og:title" content={item.name} />
+          <meta property="og:description" content={`${item.color}, ${item.region}, ${item.country}`} />
+          <meta property="og:image" content={item.image_url} />
+        </Helmet>
         <div className="ItemShow__inner">
           <img
             alt="country flag"

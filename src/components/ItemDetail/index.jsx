@@ -1,5 +1,6 @@
 import React from 'react';
 import { string, shape } from 'prop-types';
+import { Helmet } from 'react-helmet';
 import './style.scss';
 
 const Section = ({ title, children }) => (
